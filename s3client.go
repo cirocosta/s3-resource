@@ -64,7 +64,7 @@ func NewS3Client(
 	awsConfig *aws.Config,
 	useV2Signing bool,
 ) S3Client {
-	sess := session.Must(awsConfig)
+	sess := session.Must(session.NewSession())
 	client := s3.New(sess, awsConfig)
 
 	if useV2Signing {
