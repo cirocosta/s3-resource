@@ -64,7 +64,7 @@ func NewS3Client(
 	awsConfig *aws.Config,
 	useV2Signing bool,
 ) S3Client {
-	sess := session.New(awsConfig)
+	sess := session.Must(awsConfig)
 	client := s3.New(sess, awsConfig)
 
 	if useV2Signing {
@@ -91,7 +91,7 @@ func NewAwsConfig(
 	var creds *credentials.Credentials
 
 	if accessKey == "" && secretKey == "" {
-		creds = credentials.AnonymousCredentials
+		println("Using default credential chain for authentication.")
 	} else {
 		creds = credentials.NewStaticCredentials(accessKey, secretKey, sessionToken)
 	}
